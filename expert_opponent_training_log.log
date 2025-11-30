@@ -1,0 +1,36 @@
+INFO:root:Epoch 0 evaluation score: -0.12
+INFO:root:Epoch 1/5000 | Policy Loss: 0.7819 | Value Loss: 0.2558
+INFO:root:Epoch 2/5000 | Policy Loss: -0.1198 | Value Loss: 0.4294
+INFO:root:Epoch 3/5000 | Policy Loss: 0.4235 | Value Loss: 0.2234
+INFO:root:Epoch 4/5000 | Policy Loss: 0.3316 | Value Loss: 0.1293
+INFO:root:Epoch 5/5000 | Policy Loss: 0.3869 | Value Loss: 0.0741
+INFO:root:Epoch 6/5000 | Policy Loss: 0.1685 | Value Loss: 0.0745
+INFO:root:Epoch 7/5000 | Policy Loss: 0.2312 | Value Loss: 0.0937
+INFO:root:Epoch 8/5000 | Policy Loss: -0.0401 | Value Loss: 0.9868
+INFO:root:Epoch 9/5000 | Policy Loss: -0.6999 | Value Loss: 0.8463
+INFO:root:Epoch 10/5000 | Policy Loss: -0.1387 | Value Loss: 0.2954
+INFO:root:Epoch 11/5000 | Policy Loss: 0.0918 | Value Loss: 0.1285
+INFO:root:Epoch 12/5000 | Policy Loss: 0.0256 | Value Loss: 0.5641
+INFO:root:Epoch 13/5000 | Policy Loss: 0.1346 | Value Loss: 0.1354
+INFO:root:Epoch 14/5000 | Policy Loss: -0.1992 | Value Loss: 0.1353
+INFO:root:Epoch 15/5000 | Policy Loss: -0.1104 | Value Loss: 0.4497
+INFO:root:Epoch 16/5000 | Policy Loss: 0.2126 | Value Loss: 0.1315
+INFO:root:Epoch 17/5000 | Policy Loss: 0.2498 | Value Loss: 0.1001
+INFO:root:Epoch 18/5000 | Policy Loss: 0.1810 | Value Loss: 0.2346
+INFO:root:Epoch 19/5000 | Policy Loss: 0.4903 | Value Loss: 0.1418
+INFO:root:Epoch 20/5000 | Policy Loss: -0.2352 | Value Loss: 0.1876
+INFO:root:Epoch 20 evaluation score: 1.39
+INFO:root:Epoch 21/5000 | Policy Loss: -0.0958 | Value Loss: 0.5008
+INFO:root:Epoch 22/5000 | Policy Loss: 0.3278 | Value Loss: 0.2001
+INFO:root:Epoch 23/5000 | Policy Loss: 0.1470 | Value Loss: 0.0717
+INFO:root:Epoch 24/5000 | Policy Loss: -0.6437 | Value Loss: 0.3681
+INFO:root:Epoch 25/5000 | Policy Loss: 0.1206 | Value Loss: 0.4994
+INFO:root:Epoch 26/5000 | Policy Loss: -0.0050 | Value Loss: 0.5313
+INFO:root:Epoch 27/5000 | Policy Loss: -0.1117 | Value Loss: 0.2058
+INFO:root:Epoch 28/5000 | Policy Loss: 0.0790 | Value Loss: 0.1319
+INFO:root:Epoch 29/5000 | Policy Loss: 0.0647 | Value Loss: 0.5712
+INFO:root:Epoch 30/5000 | Policy Loss: 0.3634 | Value Loss: 0.1263
+INFO:root:Epoch 31/5000 | Policy Loss: 0.3534 | Value Loss: 0.1463
+INFO:root:Epoch 32/5000 | Policy Loss: -0.7386 | Value Loss: 0.5764
+INFO:root:Epoch 33/5000 | Policy Loss: 0.1198 | Value Loss: 0.1385
+INFO:root:Epoch 34/5000 | Policy Loss: 0.2713 | Value Loss: 0.0810

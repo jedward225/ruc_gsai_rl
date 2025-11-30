@@ -79,14 +79,20 @@ def ppo_update(policy_network, optimizer, old_log_probs, states, actions, return
             action_dist = torch.distributions.Categorical(action_prob)
             log_prob = action_dist.log_prob(action_batch)
 
-            ###
-            # TODO: 在此处补全 policy_loss 和 value_loss 的计算
-            # 提示：
-            # 1. 计算 `ratio`，即新策略的概率和旧策略概率的比值。
-            # 2. 使用 `clip_param` 对 `ratio` 进行剪辑，并计算 PPO 损失函数中的裁剪损失。
-            # 3. 计算 policy_loss，这是损失的策略部分。
-            # 4. 计算 value_loss，这是预测值函数和实际回报之间的均方误差。
-            ###
+            # 1. 计算 ratio：新策略概率 / 旧策略概率
+            ratio = torch.exp(log_prob - old_log_prob_batch)
+
+            # 2. 计算裁剪后的 ratio
+            clipped_ratio = torch.clamp(ratio, 1 - clip_param, 1 + clip_param)
+
+            # 3. 计算 policy_loss：取裁剪前后的最小值，再取负（因为要最大化目标）
+            policy_loss = -torch.min(
+                ratio * advantage_batch,
+                clipped_ratio * advantage_batch
+            ).mean()
+
+            # 4. 计算 value_loss：预测值与实际回报的均方误差
+            value_loss = ((value.squeeze() - return_batch) ** 2).mean()
 
             loss = policy_loss + 0.5 * value_loss
 
