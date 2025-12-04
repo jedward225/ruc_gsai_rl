@@ -72,10 +72,21 @@ expert_network = ResnetModel().to(device)
 if os.path.exists(expert_model_path):
     expert_network.load_state_dict(torch.load(expert_model_path))
     expert_network.eval()
-    policy_network.load_state_dict(torch.load(expert_model_path))
     print("Loaded expert model parameters from", expert_model_path)
 else:
     raise FileNotFoundError("Expert model file not found.")
+
+# Resume: 优先加载已训练的模型，否则从expert开始
+resume_model_path = os.path.join(MODEL_SAVE_PATH, 'best_policy_network_epoch.pkl')
+START_EPOCH = 3380  # 修改这里来设置起始epoch，0表示从头开始
+
+if os.path.exists(resume_model_path) and START_EPOCH > 0:
+    policy_network.load_state_dict(torch.load(resume_model_path))
+    print(f"Resumed from saved model: {resume_model_path}, starting at epoch {START_EPOCH}")
+else:
+    policy_network.load_state_dict(torch.load(expert_model_path))
+    START_EPOCH = 0
+    print("Starting from expert model")
 
 
 def collect_trajectories(env, policy_network, timesteps_per_batch=1024):
@@ -238,20 +249,23 @@ def evaluate_model(env, policy_network, num_games=10):
 
 
 # 训练函数
-def train(env, policy_network, optimizer, num_epochs=1000):
+def train(env, policy_network, optimizer, num_epochs=1000, start_epoch=0):
     policy_loss_list = []
     value_loss_list = []
     evaluation_scores = []
     best_evaluation_score = -float('inf')
     evaluation_epochs = []
 
-    evaluation_score = evaluate_model(env, policy_network, num_games=10)
-    evaluation_scores.append(evaluation_score)
-    evaluation_epochs.append(0)
-    logging.info(f"Epoch {0} evaluation score: {evaluation_score:.2f}")
-    print(f"Epoch {0} evaluation score: {evaluation_score:.2f}")
+    if start_epoch == 0:
+        evaluation_score = evaluate_model(env, policy_network, num_games=10)
+        evaluation_scores.append(evaluation_score)
+        evaluation_epochs.append(0)
+        logging.info(f"Epoch {0} evaluation score: {evaluation_score:.2f}")
+        print(f"Epoch {0} evaluation score: {evaluation_score:.2f}")
+    else:
+        print(f"Resuming from epoch {start_epoch}")
 
-    for epoch in range(num_epochs):
+    for epoch in range(start_epoch, num_epochs):
         # 从经验池采样
         samples, indices = collect_trajectories(env, policy_network)
 
@@ -324,4 +338,4 @@ def train(env, policy_network, optimizer, num_epochs=1000):
 
 # 主程序
 if __name__ == "__main__":
-    train(env, policy_network, optimizer, num_epochs=NUM_EPOCHS)
+    train(env, policy_network, optimizer, num_epochs=NUM_EPOCHS, start_epoch=START_EPOCH)
